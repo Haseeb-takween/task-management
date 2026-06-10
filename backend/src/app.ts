@@ -6,7 +6,8 @@ import { errorHandler, notFoundHandler } from "./middleware/error.middleware.js"
 
 const app: Express = express();
 
-app.use(cors({ origin: env.corsOrigin }));
+const allowedOrigins = env.corsOrigin.split(",").map((o) => o.trim());
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 app.use(routes);
 app.use(notFoundHandler);
